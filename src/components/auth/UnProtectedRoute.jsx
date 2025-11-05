@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router";
 import { useEffect } from "react";
 import SignInPage from "../../app/account/signin/page";
 
-export function ProtectedRoute({ children }) {
+export function UnProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth();
   const navigate = useNavigate();
   //   const router = useRouter();
@@ -14,12 +14,12 @@ export function ProtectedRoute({ children }) {
   const path = useLocation();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (!isLoading && isAuthenticated) {
       // Store the attempted URL
       sessionStorage.setItem("redirectUrl", path.pathname);
       //   sessionStorage.setItem("redirectUrl", pathname);
       //   router.push("/account/signin");
-      navigate("/account/signin");
+      navigate("/search");
     }
   }, [isAuthenticated, isLoading, navigate, path.pathname]);
 
@@ -32,8 +32,8 @@ export function ProtectedRoute({ children }) {
   }
 
   if (!isAuthenticated) {
-    return null;
+    return children;
   }
 
-  return children;
+  return null;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Sun, Moon, Bell, LogIn } from "lucide-react";
+import { Menu, X, Sun, Moon, Bell, LogIn, Link } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 export function Navbar() {
@@ -9,8 +9,9 @@ export function Navbar() {
   const [isDark, setIsDark] = useState(false);
   const [unreadCount, setUnreadCount] = useState(3);
   const auth = useAuth();
-  const isAuthenticated = typeof window !== 'undefined' && auth.isAuthenticated;
+  const isAuthenticated = typeof window !== "undefined" && auth.isAuthenticated;
   const user = auth.user;
+  console.log("User Info:", auth);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleDarkMode = () => setIsDark(!isDark);
@@ -20,7 +21,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
+          <a href="/home" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">
               FH
             </div>
@@ -29,6 +30,12 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
+            <a
+              href="/search"
+              className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition"
+            >
+              Search
+            </a>
             <a
               href="/forums"
               className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition"
@@ -40,12 +47,6 @@ export function Navbar() {
               className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition"
             >
               Chat
-            </a>
-            <a
-              href="/search"
-              className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition"
-            >
-              Search
             </a>
           </div>
 
@@ -72,19 +73,31 @@ export function Navbar() {
 
             {/* User Menu */}
             {isAuthenticated ? (
-              <button 
-                onClick={auth.logout}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"
-              >
-                <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
-                  {user?.given_name?.[0] || user?.preferred_username?.[0] || '?'}
-                </div>
-                <span className="hidden sm:inline">
-                  {user?.given_name || user?.preferred_username || 'User'}
-                </span>
-              </button>
+              <div className="flex items-center gap-2">
+                <a href="/profile">
+                  <button
+                    // onClick={auth.logout}
+                    className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"
+                  >
+                    <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
+                      {user?.given_name?.[0] ||
+                        user?.preferred_username?.[0] ||
+                        "?"}
+                    </div>
+                    <span className="hidden sm:inline">
+                      {user?.given_name || user?.preferred_username || "User"}
+                    </span>
+                  </button>
+                </a>
+                <button
+                  onClick={auth.logout}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Logout
+                </button>
+              </div>
             ) : (
-              <button 
+              <button
                 onClick={auth.login}
                 className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"
               >

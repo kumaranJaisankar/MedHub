@@ -6,27 +6,12 @@ import { PostCard } from "@/components/forum/PostCard";
 import { CreatePostModal } from "@/components/forum/CreatePostModal";
 import { MessageCircle, Users, TrendingUp, ArrowRight } from "lucide-react";
 import useUser from "@/utils/useUser";
-import { useAuth } from "@/hooks/useAuth";
 
 export default function HomePage() {
   const { data: user, loading } = useUser();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const posts = useForumStore((state) => state.posts);
   const categories = useForumStore((state) => state.categories);
-  const { isAuthenticated, isLoading } = useAuth();
-
-  // Redirect to login if not authenticated
-  useEffect(() => {
-    if (typeof window !== "undefined" || isAuthenticated) {
-      // User is authenticated - redirect to search page
-      window.location.href = "/search";
-    } else {
-      // User is not authenticated - redirect to signin page
-      if (typeof window !== "undefined") {
-        window.location.href = "/home";
-      }
-    }
-  }, [isAuthenticated, isLoading]);
 
   if (loading) {
     return (
@@ -39,10 +24,6 @@ export default function HomePage() {
         </div>
       </div>
     );
-  }
-
-  if (!user) {
-    return null;
   }
 
   // Get trending posts
