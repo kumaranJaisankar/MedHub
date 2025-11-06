@@ -10,9 +10,11 @@ import {
   Briefcase,
   Link as LinkIcon,
   BookOpen,
+  Languages,
 } from "lucide-react";
 import { ProtectedRoute } from "../../components/auth/ProtectedRoute";
 import { useAuth } from "@/hooks/useAuth";
+import AvailabilityCard from "../../components/profile/AvailabilityCard";
 
 export default function ProfilePage() {
   const posts = useForumStore((state) => state.posts);
@@ -31,7 +33,8 @@ export default function ProfilePage() {
     bio: "Cardiologist with 10+ years of clinical experience. Passionate about sharing knowledge and mentoring the next generation of healthcare professionals.",
     joinDate: "January 2023",
     website: "www.drchenshealth.com",
-    avatar: "👩‍⚕️",
+    avatar: "🧑‍⚕️",
+    languages: ["English", "Spanish"],
   };
 
   // User's posts
@@ -52,16 +55,21 @@ export default function ProfilePage() {
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg p-8 mb-8">
             <div className="flex items-start gap-6">
               {/* Avatar */}
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-6xl flex-shrink-0">
+              <div className="relative w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-6xl flex-shrink-0">
                 {user.avatar}
+                <span className="absolute bottom-0 right-0  translate-x-1/5 translate-y-1/4 text-2xl">
+                  ♂️
+                </span>
               </div>
-
               {/* Info */}
               <div className="flex-1">
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">
-                      {user.name}
+                      {user.name}{" "}
+                      <span className="text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-200  px-2 py-1 rounded">
+                        Mentor
+                      </span>
                     </h1>
                     <p className="text-lg text-blue-600 dark:text-blue-400 font-medium">
                       {user.expertise}
@@ -92,6 +100,10 @@ export default function ProfilePage() {
                     <span>Joined {user.joinDate}</span>
                   </div>
                   <div className="flex items-center gap-2">
+                    <Languages size={16} />
+                    <span>{user.languages.join(", ")}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
                     <LinkIcon size={16} />
                     <a
                       href="#"
@@ -104,6 +116,7 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
+          <AvailabilityCard />
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
