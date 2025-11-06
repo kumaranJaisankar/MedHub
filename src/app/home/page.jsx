@@ -32,7 +32,7 @@ export default function HomePage() {
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+    <div className=" bg-slate-50 dark:bg-slate-950">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-500 via-teal-500 to-blue-600 py-20 text-white dark:from-blue-900 dark:via-teal-900 dark:to-blue-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

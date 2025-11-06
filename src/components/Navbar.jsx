@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { Menu, X, Sun, Moon, Bell, LogIn, Link } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useTheme } from "next-themes";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [unreadCount, setUnreadCount] = useState(3);
   const auth = useAuth();
   const isAuthenticated = typeof window !== "undefined" && auth.isAuthenticated;
@@ -14,11 +16,14 @@ export function Navbar() {
   console.log("User Info:", auth);
 
   const toggleMenu = () => setIsOpen(!isOpen);
-  const toggleDarkMode = () => setIsDark(!isDark);
+  const toggleDarkMode = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+    setIsDark(!isDark);
+  };
 
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <a href="/home" className="flex items-center gap-2">

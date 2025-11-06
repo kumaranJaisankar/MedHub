@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { KeycloakProvider } from "@/components/auth/KeycloakProvider";
 import { lazy, Suspense } from "react";
 import { ProtectedRoute } from "../components/auth/ProtectedRoute";
+import { ThemeProvider } from "./Providers";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,8 +35,10 @@ const ClientLayout = lazy(() =>
     default: ({ children }) => (
       <KeycloakProvider>
         <QueryClientProvider client={queryClient}>
-          <Navbar />
-          {children}
+          <ThemeProvider>
+            <Navbar />
+            {children}
+          </ThemeProvider>
         </QueryClientProvider>
       </KeycloakProvider>
     ),
