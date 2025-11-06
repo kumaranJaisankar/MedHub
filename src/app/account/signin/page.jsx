@@ -41,7 +41,7 @@ export default function SignInPage() {
 
   return (
     <UnProtectedRoute>
-      <div className="flex min-h-screen w-full items-center justify-center bg-gradient-to-br from-blue-50 via-white to-teal-50 p-4">
+      <div className="flex  w-full items-center justify-center bg-slate-50 dark:bg-slate-950   from-blue-50 via-white to-teal-50 p-4">
         <div className="w-full max-w-md space-y-8">
           {/* Logo Area */}
           <div className="text-center">
@@ -50,24 +50,28 @@ export default function SignInPage() {
                 <span className="text-3xl">🏥</span>
               </div>
             </div>
-            <h1 className="text-4xl font-bold text-slate-900">MedHub</h1>
-            <p className="mt-2 text-slate-600">Medical Discussion Community</p>
+            <h1 className="text-4xl font-bold  text-slate-900 dark:text-slate-50">
+              MedHub
+            </h1>
+            <p className="mt-2  text-slate-600 dark:text-slate-400">
+              Medical Discussion Community
+            </p>
           </div>
 
           {/* Form Card */}
           <form
             noValidate
             onSubmit={onSubmit}
-            className="rounded-2xl bg-white p-8 shadow-lg"
+            className="rounded-2xl bg-slate-50 dark:bg-slate-900  p-8 shadow-lg"
           >
-            <h2 className="mb-6 text-2xl font-bold text-slate-900">
+            <h2 className="mb-6 text-2xl font-bold text-slate-900 dark:text-slate-50">
               Welcome Back
             </h2>
 
             <div className="space-y-4">
               {/* Email Input */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700">
+                <label className="block text-sm font-medium  text-slate-700 dark:text-slate-400">
                   Email Address
                 </label>
                 <input
@@ -83,7 +87,7 @@ export default function SignInPage() {
 
               {/* Password Input */}
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-700">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-400">
                   Password
                 </label>
                 <div className="relative">
@@ -123,7 +127,7 @@ export default function SignInPage() {
               </button>
 
               {/* Sign Up Link */}
-              <p className="text-center text-sm text-slate-600">
+              <p className="text-center text-sm text-slate-600 dark:text-slate-400">
                 Don't have an account?{" "}
                 <a
                   href="/account/signup"

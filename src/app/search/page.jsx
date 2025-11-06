@@ -47,7 +47,7 @@ const SearchPage = () => {
   return (
     <ProtectedRoute>
       <div className="bg-slate-50 dark:bg-slate-950 min-h-screen pt-8 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Search Header */}
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4">
